@@ -5,7 +5,9 @@ import com.loafofbread.toasterapi.armor.CustomArmor;
 import com.loafofbread.toasterapi.fish.CustomFish;
 import com.loafofbread.toasterapi.fish.Fishing;
 import com.loafofbread.toasterapi.fish.FishingCommand;
+import com.loafofbread.toasterapi.item.CreativeCommand;
 import com.loafofbread.toasterapi.item.CustomItem;
+import com.loafofbread.toasterapi.item.ItemGUI;
 import com.loafofbread.toasterapi.item.ItemHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -53,6 +55,7 @@ public class ToasterAPI extends JavaPlugin {
 
         Bukkit.getLogger().log(Level.INFO, "Creating Commands");
         getCommand("fishingguide").setExecutor(new FishingCommand(this));
+        getCommand("creativemenu").setExecutor(new CreativeCommand(this));
 
         Bukkit.getLogger().log(Level.INFO, "Done!");
     }

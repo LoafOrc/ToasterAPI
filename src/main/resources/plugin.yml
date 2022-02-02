@@ -6,9 +6,17 @@ api-version: 1.18
 permissions:
   loafofbread.fishing.guide:
     default: not op
+  loafofbread.admin.creativemenu:
+    default: op
 commands:
   fishingguide:
     aliases:
       - fguide
     description: Shows a GUI for all fish added to ToasterAPI.
+    usage: /<command>
+  creativemenu:
+    aliases:
+      - toasteritems
+      - items
+    description: Shows A GUI for all custom items add to ToasterAPI.
     usage: /<command>
