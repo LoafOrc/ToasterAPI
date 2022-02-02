@@ -35,12 +35,12 @@ public abstract class CustomItem extends Loottable.Drop {
     }
     public static ChatColor getRarityColor(Rarity rarity) {
         switch (rarity) {
-            case COMMON -> { return ChatColor.WHITE; }
-            case UNCOMMON -> { return ChatColor.GREEN; }
-            case RARE -> { return ChatColor.BLUE; }
-            case EPIC -> { return ChatColor.LIGHT_PURPLE; }
-            case LEGENDARY -> { return ChatColor.GOLD; }
-            default -> { return ChatColor.RESET; }
+            case COMMON: return ChatColor.WHITE;
+            case UNCOMMON: return ChatColor.GREEN;
+            case RARE: return ChatColor.BLUE;
+            case EPIC: return ChatColor.LIGHT_PURPLE;
+            case LEGENDARY: return ChatColor.GOLD;
+            default: return ChatColor.RESET;
         }
     }
 
