@@ -1,0 +1,14 @@
+name: MinecraftOverhaul
+version: 1.0.0
+author: [LoafOfBread]
+main: com.loafofbread.toasterapi.ToasterAPI
+api-version: 1.18
+permissions:
+  loafofbread.fishing.guide:
+    default: not op
+commands:
+  fishingguide:
+    aliases:
+      - fguide
+    description: Shows a GUI for all fish added to ToasterAPI.
+    usage: /<command>
