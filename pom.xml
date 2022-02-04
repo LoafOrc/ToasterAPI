@@ -56,4 +56,13 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>importIntoLocalServer</id>
+            <build>
+                <directory>../../Server/plugins</directory>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

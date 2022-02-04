@@ -1,6 +1,6 @@
-name: MinecraftOverhaul
+name: ToasterAPI
 version: 1.0.0
-author: [LoafOfBread]
+author: LoafOfBread
 main: com.loafofbread.toasterapi.ToasterAPI
 api-version: 1.18
 permissions:
@@ -20,3 +20,4 @@ commands:
       - items
     description: Shows A GUI for all custom items add to ToasterAPI.
     usage: /<command>
+    permission: loafofbread.admin.creativemenu

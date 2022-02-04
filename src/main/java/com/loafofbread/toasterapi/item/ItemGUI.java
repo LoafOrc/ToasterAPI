@@ -11,6 +11,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -71,8 +73,20 @@ public class ItemGUI implements InventoryHolder {
     private class GUIListener implements org.bukkit.event.Listener {
         @EventHandler
         public void enchantGuiClick(final InventoryClickEvent event) {
-            if (event.getInventory().getHolder() instanceof com.loafofbread.toasterapi.fish.FishingGUI) {
+            if (event.getInventory().getHolder() instanceof ItemGUI) {
                 event.setCancelled(true);
+                if(event.getClick() == ClickType.SHIFT_LEFT) {
+                    event.setCancelled(false);
+                    ItemStack newStack = event.getCurrentItem();
+                    if(newStack == null) return;
+                    newStack.setAmount(event.getCurrentItem().getMaxStackSize());
+                    event.setCurrentItem(newStack);
+                } else if(event.getClick() == ClickType.LEFT) {
+                    event.setCancelled(true);
+                    ItemStack newStack = event.getCurrentItem();
+                    if(newStack == null) return;
+                    event.setCursor(newStack);
+                }
             }
         }
     }

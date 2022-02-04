@@ -12,7 +12,6 @@ import org.bukkit.permissions.Permission;
 
 public class FishingCommand implements CommandExecutor {
 
-    private final Permission fishing_guide = Bukkit.getPluginManager().getPermission("loafofbread.fishing.guide");
     private final String noPermission = ChatColor.RED + "" + ChatColor.BOLD + "(!)" + ChatColor.RESET + " " + ChatColor.RED + " Insufficient Permission.";
     private final String onlyPlayersCanRunThisCommand = ChatColor.RED + "" + ChatColor.BOLD + "(!)" + ChatColor.RESET + " " + ChatColor.RED + " Only players can run this command.";
 
@@ -29,9 +28,9 @@ public class FishingCommand implements CommandExecutor {
                 return true;
             }
             Player player = (Player) sender;
-            if(!player.hasPermission(fishing_guide)) {
+            if(!player.hasPermission("loafofbread.fishing.guide")) {
                 player.sendMessage(noPermission);
-                return true;
+                //return true;
             }
             new FishingGUI(plugin, player).openInv(player);
         }

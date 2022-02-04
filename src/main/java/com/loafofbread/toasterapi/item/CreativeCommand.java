@@ -23,16 +23,13 @@ public class CreativeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("creativecommand")) {
+        if(cmd.getName().equalsIgnoreCase("creativemenu")) {
             if(sender instanceof ConsoleCommandSender) {
                 sender.sendMessage(onlyPlayersCanRunThisCommand);
                 return true;
             }
             Player player = (Player) sender;
-            if(!player.hasPermission("loafofbread.admin.creativemenu")) {
-                player.sendMessage(noPermission);
-                return true;
-            }
+            player.sendMessage("Opening Creative Menu");
             new ItemGUI(plugin, player).openInv(player);
         }
         return true;
