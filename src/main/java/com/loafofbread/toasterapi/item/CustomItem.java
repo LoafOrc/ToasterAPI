@@ -122,7 +122,7 @@ public abstract class CustomItem extends Loottable.Drop {
         item.setItemMeta(newMeta);
     }
 
-    protected abstract Recipe getRecipe(NamespacedKey recipeKey);
+    protected Recipe getRecipe(NamespacedKey recipeKey) { return null; }
 
     private int getUniqueInteger(String name){
         String plaintext = name;
