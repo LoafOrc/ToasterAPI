@@ -120,7 +120,7 @@ public abstract class CustomBoss implements Listener {
         bossBar.setProgress(healthPercentage());
     }
 
-    private void remove() {
+    protected void remove() {
         for(Entity e : children) {
             e.remove();
         }
