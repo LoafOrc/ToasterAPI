@@ -92,7 +92,7 @@ public abstract class CustomBoss implements Listener {
     }
 
     protected Entity createChild(Class childClass, Location spawnLocation) {
-        Entity child = boss.getWorld().spawn(spawnLocation, entityClass);
+        Entity child = boss.getWorld().spawn(spawnLocation, childClass);
         child.getPersistentDataContainer().set(ToasterAPI.boss_child, PersistentDataType.STRING, id);
         children.add(child);
         return child;
