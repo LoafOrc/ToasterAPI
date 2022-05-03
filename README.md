@@ -15,7 +15,7 @@ Dependceny
   <dependency>
       <groupId>com.github.LoafOrc</groupId>
       <artifactId>ToasterAPI</artifactId>
-      <version>b0.1</version>
+      <version>main-SNAPSHOT</version>
       <scope>provided</scope>
   </dependency>
 ```
