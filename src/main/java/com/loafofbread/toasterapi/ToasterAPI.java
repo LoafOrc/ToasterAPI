@@ -38,6 +38,8 @@ public class ToasterAPI extends JavaPlugin {
     public static HashMap<JavaPlugin, HashMap<String, CustomFish>> pluginFish = new HashMap<>();
     public static HashMap<String, CustomFish> allFish = new HashMap<>();
 
+    public static ItemGUI itemGUI;
+
     @Override
     public void onEnable() {
         Bukkit.getLogger().log(Level.INFO, "Constructing NamespacedKeys");
@@ -47,6 +49,8 @@ public class ToasterAPI extends JavaPlugin {
         fish_length = new NamespacedKey(this, "fish_length");
         boss = new NamespacedKey(this, "boss");
         boss_child = new NamespacedKey(this, "boss_child");
+
+        itemGUI = new ItemGUI(this);
 
         Bukkit.getLogger().log(Level.INFO, "Registering Listeners");
         registerListener(new ItemHandler());

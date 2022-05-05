@@ -30,7 +30,7 @@ public class CreativeCommand implements CommandExecutor {
             }
             Player player = (Player) sender;
             player.sendMessage("Opening Creative Menu");
-            new ItemGUI(plugin, player).openInv(player);
+            ToasterAPI.itemGUI.openInv(player, 0);
         }
         return true;
     }
