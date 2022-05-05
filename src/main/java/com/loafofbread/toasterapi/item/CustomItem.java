@@ -124,7 +124,7 @@ public abstract class CustomItem extends Loottable.Drop {
 
     protected abstract Recipe getRecipe(NamespacedKey recipeKey);
 
-    private int getUniqueInteger(String name){
+    protected int getUniqueInteger(String name){
         String plaintext = name;
         int hash = name.hashCode();
         MessageDigest m;
