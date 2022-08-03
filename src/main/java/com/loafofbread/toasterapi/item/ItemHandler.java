@@ -8,7 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -35,6 +37,16 @@ public class ItemHandler implements Listener {
         Player player = (Player) event.getDamager();
         CustomItem item = getItem(player.getItemInUse());
         if(item != null) item.entityHit(event);
+    }
+    @EventHandler
+    public void consumed(PlayerItemConsumeEvent event) {
+        CustomItem item = getItem(event.getItem());
+        if(item != null) item.consumed(event);
+    }
+    @EventHandler
+    public void dropped(PlayerDropItemEvent event) {
+        CustomItem item = getItem(event.getItemDrop().getItemStack());
+        if(item != null) item.dropped(event);
     }
 
     private CustomItem getItem(ItemStack item) {

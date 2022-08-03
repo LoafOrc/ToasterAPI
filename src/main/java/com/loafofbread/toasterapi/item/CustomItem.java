@@ -8,7 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -157,4 +159,6 @@ public abstract class CustomItem extends Loottable.Drop {
     public void rightClick(PlayerInteractEvent event) {}
     public void leftClick(PlayerInteractEvent event) {}
     public void entityHit(EntityDamageByEntityEvent event) {}
+    public void consumed(PlayerItemConsumeEvent event) {}
+    public void dropped(PlayerDropItemEvent event) {}
 }

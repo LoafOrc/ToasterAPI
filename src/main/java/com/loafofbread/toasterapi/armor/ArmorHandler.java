@@ -43,6 +43,7 @@ public class ArmorHandler implements Listener {
         @Override
         public void run() {
             for(ItemStack item : player.getInventory().getArmorContents()) {
+                if(item == null) continue;
                 CustomArmor armor = ToasterAPI.allArmor.get(item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.armor, PersistentDataType.STRING));
                 if(armor != null) {
                     armor.onEquip(player);
