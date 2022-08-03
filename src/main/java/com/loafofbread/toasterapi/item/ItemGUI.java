@@ -4,7 +4,6 @@ import com.loafofbread.toasterapi.Loottable;
 import com.loafofbread.toasterapi.ToasterAPI;
 import com.loafofbread.toasterapi.fish.CustomFish;
 import com.loafofbread.toasterapi.fish.Fishing;
-import com.sun.tools.javac.util.Names;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
