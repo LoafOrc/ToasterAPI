@@ -55,6 +55,8 @@ public abstract class CustomArmor {
     }
     public Color getLeatherColor() { return null; }
 
+    protected ItemMeta applyMeta(ItemMeta before, String piece) { return before; }
+
     private Recipe generateRecipe(String Piece, ItemStack Result) {
         if(ingredient == null) return null;
         ShapedRecipe _result = new ShapedRecipe(new NamespacedKey(plugin, prefix + "_" + Piece.toLowerCase()), Result);
@@ -74,8 +76,8 @@ public abstract class CustomArmor {
         ItemMeta _meta = _result.getItem().getItemMeta();
 
 
-            //AttributeModifier armor = new AttributeModifier(UUID.randomUUID(), "generic.armor", Armor, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.valueOf(_Short.toUpperCase()));
-            //_meta.addAttributeModifier(Attribute.GENERIC_ARMOR, armor);
+        //AttributeModifier armor = new AttributeModifier(UUID.randomUUID(), "generic.armor", Armor, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.valueOf(_Short.toUpperCase()));
+        //_meta.addAttributeModifier(Attribute.GENERIC_ARMOR, armor);
 
 
         if(type.equalsIgnoreCase("LEATHER")) {  //If the item is Leather
@@ -95,7 +97,7 @@ public abstract class CustomArmor {
         }
 
         _meta.getPersistentDataContainer().set(ToasterAPI.armor, PersistentDataType.STRING, id);
-        _result.setItemMeta(_meta);
+        _result.setItemMeta(applyMeta(_meta, _Piece));
         _result.createRecipe();
         return _result;
     }

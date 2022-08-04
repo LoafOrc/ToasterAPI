@@ -89,7 +89,10 @@ public abstract class CustomItem extends Loottable.Drop {
         meta.setDisplayName(ChatColor.RESET + "" + getRarityColor(rarity) + name);
         if(!lore.isEmpty()) meta.setLore(lore);
 
-        meta.setCustomModelData(getUniqueInteger(id));
+        if(getUniqueInteger() != -1) {
+            meta.setCustomModelData(getUniqueInteger());
+        }
+        meta.setUnbreakable(isUnbreakable());
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(ToasterAPI.item, PersistentDataType.STRING, id);
@@ -125,33 +128,10 @@ public abstract class CustomItem extends Loottable.Drop {
     }
 
     protected abstract Recipe getRecipe(NamespacedKey recipeKey);
+    public boolean isUnbreakable() { return false; }
 
-    protected int getUniqueInteger(String name){
-        String plaintext = name;
-        int hash = name.hashCode();
-        MessageDigest m;
-        try {
-            m = MessageDigest.getInstance("MD5");
-            m.reset();
-            m.update(plaintext.getBytes());
-            byte[] digest = m.digest();
-            BigInteger bigInt = new BigInteger(1,digest);
-            String hashtext = bigInt.toString(10);
-            // Now we need to zero pad it if you actually want the full 32 chars.
-            while(hashtext.length() < 32 ){
-                hashtext = "0"+hashtext;
-            }
-            int temp = 0;
-            for(int i =0; i<hashtext.length();i++){
-                char c = hashtext.charAt(i);
-                temp+=(int)c;
-            }
-            return hash+temp;
-        } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return hash;
+    protected int getUniqueInteger(){
+        return -1;
     }
 
     protected String getSkullID() { return null; }
