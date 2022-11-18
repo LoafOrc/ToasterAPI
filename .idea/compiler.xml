@@ -6,6 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for ToasterAPI" enabled="true">
+        <sourceOutputDir name="../../DevServer/plugins/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../DevServer/plugins/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
         <module name="ToasterAPI" />
       </profile>
     </annotationProcessing>

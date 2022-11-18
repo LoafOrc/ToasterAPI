@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -51,6 +52,7 @@ public class ItemHandler implements Listener {
 
     private CustomItem getItem(ItemStack item) {
         if(item == null) return null;
+        if(!item.getItemMeta().getPersistentDataContainer().has(ToasterAPI.item, PersistentDataType.STRING)) return null;
         String id = item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.item, PersistentDataType.STRING);
         return ToasterAPI.allItems.get(id);
     }

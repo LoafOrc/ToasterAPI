@@ -66,10 +66,15 @@ public abstract class CustomArmor {
     }
     protected CustomItem generatePiece(String type, String _Piece, String _Short) {
         Material _mat = Material.valueOf(type.toUpperCase() + "_" + _Piece.toUpperCase());
-        CustomItem _result = new CustomItem(plugin, rarity, prefix.toLowerCase() + "_" + _Piece.toLowerCase(), _mat, prefix + " " + _Piece) {
+        CustomItem _result = new CustomItem(plugin, prefix.toLowerCase() + "_" + _Piece.toLowerCase(), _mat, prefix + " " + _Piece) {
             @Override
             protected Recipe getRecipe(NamespacedKey recipeKey) {
                 return generateRecipe(_Piece.toLowerCase(), getItem());
+            }
+
+            @Override
+            public Rarity getRarity() {
+                return rarity;
             }
         };
 

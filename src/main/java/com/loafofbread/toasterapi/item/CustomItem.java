@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -25,6 +26,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public abstract class CustomItem extends Loottable.Drop {
@@ -32,8 +34,7 @@ public abstract class CustomItem extends Loottable.Drop {
         COMMON,
         UNCOMMON,
         RARE,
-        EPIC,
-        LEGENDARY
+        EPIC
     }
     public static ChatColor getRarityColor(Rarity rarity) {
         switch (rarity) {
@@ -41,7 +42,6 @@ public abstract class CustomItem extends Loottable.Drop {
             case UNCOMMON: return ChatColor.GREEN;
             case RARE: return ChatColor.BLUE;
             case EPIC: return ChatColor.LIGHT_PURPLE;
-            case LEGENDARY: return ChatColor.GOLD;
             default: return ChatColor.RESET;
         }
     }
@@ -59,21 +59,21 @@ public abstract class CustomItem extends Loottable.Drop {
     @Deprecated
     protected final JavaPlugin plugin;
 
-    public CustomItem(JavaPlugin plugin, Rarity rarity, String id, Material base, String name) {
-        this(plugin, rarity, id, base, name, new ArrayList<>());
+    public CustomItem(JavaPlugin plugin, String id, Material base, String name) {
+        this(plugin, id, base, name, new ArrayList<>());
     }
 
     private boolean recipeCompleted = false;
 
-    public CustomItem(JavaPlugin plugin, Rarity rarity, String id, Material base, String name, ArrayList<String> lore) {
-        this(plugin, rarity, id, new ItemStack(base, 1), name, lore, true);
+    public CustomItem(JavaPlugin plugin, String id, Material base, String name, ArrayList<String> lore) {
+        this(plugin, id, new ItemStack(base, 1), name, lore, true);
     }
 
-    public CustomItem(JavaPlugin plugin, Rarity rarity, String id, ItemStack base, String name, ArrayList<String> lore, boolean craft) {
+    public CustomItem(JavaPlugin plugin, String id, ItemStack base, String name, ArrayList<String> lore, boolean craft) {
         this.id = id;
         this.plugin = plugin;
 
-        this.name = ChatColor.RESET + "" + getRarityColor(rarity) + name;
+        this.name = ChatColor.RESET + "" + getRarityColor(getRarity()) + name;
 
         item = base;
         if(base.getType() == Material.PLAYER_HEAD) {
@@ -86,7 +86,7 @@ public abstract class CustomItem extends Loottable.Drop {
         }
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.RESET + "" + getRarityColor(rarity) + name);
+        meta.setDisplayName(ChatColor.RESET + "" + getRarityColor(getRarity()) + name);
         if(!lore.isEmpty()) meta.setLore(lore);
 
         if(getUniqueInteger() != -1) {
@@ -128,6 +128,7 @@ public abstract class CustomItem extends Loottable.Drop {
     }
 
     protected abstract Recipe getRecipe(NamespacedKey recipeKey);
+    public abstract Rarity getRarity();
     public boolean isUnbreakable() { return false; }
 
     protected int getUniqueInteger(){

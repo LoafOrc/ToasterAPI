@@ -5,10 +5,7 @@ import com.loafofbread.toasterapi.armor.CustomArmor;
 import com.loafofbread.toasterapi.fish.CustomFish;
 import com.loafofbread.toasterapi.fish.Fishing;
 import com.loafofbread.toasterapi.fish.FishingCommand;
-import com.loafofbread.toasterapi.item.CreativeCommand;
-import com.loafofbread.toasterapi.item.CustomItem;
-import com.loafofbread.toasterapi.item.ItemGUI;
-import com.loafofbread.toasterapi.item.ItemHandler;
+import com.loafofbread.toasterapi.item.*;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Event;
@@ -40,9 +37,10 @@ public class ToasterAPI extends JavaPlugin {
 
     public static ItemGUI itemGUI;
 
+
     @Override
     public void onEnable() {
-        Bukkit.getLogger().log(Level.INFO, "Constructing NamespacedKeys");
+        Bukkit.getLogger().log(Level.INFO, "Constructing Keys");
         item = new NamespacedKey(this, "item");
         armor = new NamespacedKey(this, "armor");
         player = new NamespacedKey(this, "player");
