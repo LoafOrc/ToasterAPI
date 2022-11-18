@@ -32,8 +32,8 @@ public abstract class CustomFish extends CustomItem {
 
     public int getWeight() { return 15; }
 
-    public CustomFish(JavaPlugin plugin, Rarity rarity, String id, Material base, String name) {
-        super(plugin, rarity, id, base, name);
+    public CustomFish(JavaPlugin plugin, String id, Material base, String name) {
+        super(plugin, id, base, name);
     }
 
     public abstract int getXP(int size, Player player);
