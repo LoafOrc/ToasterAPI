@@ -55,6 +55,8 @@ public class ToasterAPI extends JavaPlugin {
         registerListener(new ArmorHandler(this));
         registerListener(new Fishing(this));
 
+
+
         Bukkit.getLogger().log(Level.INFO, "Creating Commands");
         getCommand("fishingguide").setExecutor(new FishingCommand(this));
         getCommand("creativemenu").setExecutor(new CreativeCommand(this));
