@@ -1,7 +1,6 @@
 package com.loafofbread.toasterapi.fish;
 
 import com.loafofbread.toasterapi.ToasterAPI;
-import com.loafofbread.toasterapi.armor.CustomArmor;
 import com.loafofbread.toasterapi.item.CustomItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -34,6 +33,17 @@ public abstract class CustomFish extends CustomItem {
 
     public CustomFish(JavaPlugin plugin, String id, Material base, String name) {
         super(plugin, id, base, name);
+<<<<<<< Updated upstream
+=======
+
+        HashMap<String, CustomFish> pluginFish = ToasterAPI.pluginFish.get(plugin);
+        if(pluginFish == null) {
+            pluginFish = new HashMap<>();
+        }
+        pluginFish.put(getID(), this);
+        ToasterAPI.allFish.put(getID(), this);
+        Fishing.Fish.add(this, getWeight());
+>>>>>>> Stashed changes
     }
 
     public abstract int getXP(int size, Player player);
@@ -82,17 +92,6 @@ public abstract class CustomFish extends CustomItem {
 
     public void handleAdvancement(int Size, Player player) {
         player.sendMessage(ChatColor.GOLD + "Great catch! " + ChatColor.GRAY + "Length: " + ChatColor.AQUA + Size + ChatColor.GRAY + "cm");
-    }
-
-    @Override
-    public void put() {
-        HashMap<String, CustomFish> pluginFish = ToasterAPI.pluginFish.get(plugin);
-        if(pluginFish == null) {
-            pluginFish = new HashMap<>();
-        }
-        pluginFish.put(getID(), this);
-        ToasterAPI.allFish.put(getID(), this);
-        Fishing.Fish.add(this, getWeight());
     }
 
     @Override

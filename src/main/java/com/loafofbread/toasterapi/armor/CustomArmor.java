@@ -1,43 +1,24 @@
 package com.loafofbread.toasterapi.armor;
 
-import com.loafofbread.toasterapi.ToasterAPI;
-import com.loafofbread.toasterapi.item.CustomItem;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.UUID;
+import com.loafofbread.toasterapi.item.CustomItem;
 
 public abstract class CustomArmor {
-    public final CustomItem helmet;
-    public final CustomItem chestplate;
-    public final CustomItem leggings;
-    public final CustomItem boots;
+    private final String prefix;
+    private final CustomItem helmet, chestplate, leggings, boots;
+    
+    public String getPrefix() { return prefix; }
+    
+    public CustomItem getHelmet() { return helmet; }
+    public CustomItem getChestplate() { return chestplate; }
+    public CustomItem getLeggings() { return leggings; }
+    public CustomItem getBoots() { return boots; }
 
-    @Deprecated
-    protected final JavaPlugin plugin;
-
-    public final String prefix;
-    private final ItemStack ingredient;
-
-    private final CustomItem.Rarity rarity;
-
-    protected final String id;
-
-    protected CustomArmor(JavaPlugin plugin, CustomItem.Rarity rarity, String type, String prefix, ItemStack ingredient) {
-        this.plugin = plugin;
+    protected CustomArmor(final String prefix) {
         this.prefix = prefix;
+<<<<<<< Updated upstream
         this.rarity = rarity;
         this.ingredient = ingredient;
         this.id = prefix.toLowerCase(Locale.ROOT).replace(' ', '_') + "_armor";
@@ -105,34 +86,23 @@ public abstract class CustomArmor {
         _result.setItemMeta(applyMeta(_meta, _Piece));
         _result.createRecipe();
         return _result;
+=======
+
+        this.helmet = createHelmet();
+        this.chestplate = createChesplate();
+        this.leggings = createLeggings();
+        this.boots = createBoots();
+>>>>>>> Stashed changes
     }
 
-    public boolean onEquip(Player _Player) {
-        final ItemStack[] _ArmorContents = _Player.getInventory().getArmorContents();
-        int _SetPieces = 0;
-        for(int i = 0; i < _ArmorContents.length; i++){
-            if(_ArmorContents[i] == null) {
-                continue;
-            }
-
-            ItemMeta _armorMeta = _ArmorContents[i].getItemMeta();
-            if(!_armorMeta.getPersistentDataContainer().has(ToasterAPI.armor, PersistentDataType.STRING)) continue;
-            if(_armorMeta.getPersistentDataContainer().get(ToasterAPI.armor, PersistentDataType.STRING).equals(id)) {
-                _SetPieces++;
-            }
-        }
-
-
-        if(_SetPieces > 0){
-            setBonus(_Player, _SetPieces);
-        }
-        if(_SetPieces == 0){
-            resetBonus(_Player);
-        }
-        if(_SetPieces == 4) return true;
-        return false;
+    protected String createName(final String name) {
+        return prefix + " " + name;
     }
+    protected abstract CustomItem createHelmet();
+    protected abstract CustomItem createChesplate();
+    protected abstract CustomItem createLeggings();
+    protected abstract CustomItem createBoots();
 
-    protected abstract void setBonus(Player player, int Pieces);
-    protected abstract void resetBonus(Player player);
+    // No more setBonus() and resetBonus() methods, in favour of minecrafts in-build attribute system
+    // Which is infintely more robust
 }

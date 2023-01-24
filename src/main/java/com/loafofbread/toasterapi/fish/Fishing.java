@@ -57,24 +57,23 @@ public class Fishing implements Listener {
     public final int LEVEL_ADD = 2;
 
     private final ToasterAPI plugin;
+    private final Random random = new Random();
 
     public Fishing(ToasterAPI plugin) {
         this.plugin = plugin;
-
     }
 
     @EventHandler
-    public void enhancedRod(PlayerFishEvent event) {
+    public void enhancedRod(final PlayerFishEvent event) {
         if(event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
 
             CAUGHT caught;
 
             int LuckOfTheSeaLevel = EnchantHandler.getLevel(event.getPlayer().getItemInHand(), Enchantment.LUCK);
-            Random r = new Random();
-            float random = 0 + r.nextFloat() * ((getTreasureChance(LuckOfTheSeaLevel) + getFishChance(LuckOfTheSeaLevel) + getMobChance(LuckOfTheSeaLevel)) - 0);
+            float value = 0 + random.nextFloat() * ((getTreasureChance(LuckOfTheSeaLevel) + getFishChance(LuckOfTheSeaLevel) + getMobChance(LuckOfTheSeaLevel)) - 0);
 
-            if(random <= getFishChance(LuckOfTheSeaLevel)) caught = CAUGHT.FISH;
-            else if(random <= getFishChance(LuckOfTheSeaLevel) + getTreasureChance(LuckOfTheSeaLevel) && event.getHook().isInOpenWater()) caught = CAUGHT.TREASURE;
+            if(value <= getFishChance(LuckOfTheSeaLevel)) caught = CAUGHT.FISH;
+            else if(value <= getFishChance(LuckOfTheSeaLevel) + getTreasureChance(LuckOfTheSeaLevel) && event.getHook().isInOpenWater()) caught = CAUGHT.TREASURE;
             else if(event.getHook().isInOpenWater()) caught = CAUGHT.MOB;
             else caught = CAUGHT.FAIL;
 
@@ -102,7 +101,7 @@ public class Fishing implements Listener {
                     }
                     break;
                 case TREASURE:
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 0 + r.nextFloat() * (2 - 0));
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 0 + random.nextFloat() * (2 - 0));
                     player.sendMessage(ChatColor.GOLD + "SHINY!");
                     ItemStack treasure = (ItemStack) Treasure.getItem(world, player).item;
                     int bonus = player.getLevel() >= LEVEL_BONUS? LEVEL_ADD : 0;
