@@ -2,7 +2,9 @@ package com.loafofbread.toasterapi.item;
 
 import com.loafofbread.toasterapi.Loottable;
 import com.loafofbread.toasterapi.ToasterAPI;
+
 import dev.dbassett.skullcreator.SkullCreator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

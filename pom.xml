@@ -25,6 +25,19 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -38,7 +51,13 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+
+        <repository>
+            <id>skullcreator-repo</id>
+            <url>https://github.com/deanveloper/SkullCreator/raw/mvn-repo/</url>
+        </repository>
     </repositories>
+
 
     <dependencies>
         <dependency>
@@ -48,10 +67,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- SkullCreator -->
         <dependency>
-            <groupId>com.github.deanveloper</groupId>
-            <artifactId>SkullCreator</artifactId>
-            <version>4789847</version>
+            <groupId>dev.dbassett</groupId>
+            <artifactId>skullcreator</artifactId>
+            <version>3.0.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -106,6 +106,7 @@ public class ItemGUI implements InventoryHolder {
     private class GUIListener implements org.bukkit.event.Listener {
         @EventHandler
         public void enchantGuiClick(final InventoryClickEvent event) {
+            if(event.getInventory() == null) return;
             if (event.getInventory().getHolder() instanceof ItemGUI) {
                 event.setCancelled(true);
                 String[] args = getAction(event.getCurrentItem().getItemMeta()).split("_");

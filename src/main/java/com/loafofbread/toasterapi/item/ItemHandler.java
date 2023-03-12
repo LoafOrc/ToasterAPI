@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -33,31 +32,27 @@ public class ItemHandler implements Listener {
         }
     }
     @EventHandler
-    public void entityHit(EntityDamageByEntityEvent event) {
+    public void entityHit(final EntityDamageByEntityEvent event) {
         if(event.getDamager().getType() != EntityType.PLAYER) return;
         final Player player = (Player) event.getDamager();
         final CustomItem item = getItem(player.getItemInUse());
         if(item != null) item.entityHit(event);
     }
     @EventHandler
-    public void consumed(PlayerItemConsumeEvent event) {
+    public void consumed(final PlayerItemConsumeEvent event) {
         CustomItem item = getItem(event.getItem());
         if(item != null) item.consumed(event);
     }
     @EventHandler
-    public void dropped(PlayerDropItemEvent event) {
+    public void dropped(final PlayerDropItemEvent event) {
         CustomItem item = getItem(event.getItemDrop().getItemStack());
         if(item != null) item.dropped(event);
     }
 
     private CustomItem getItem(final ItemStack item) {
         if(item == null) return null;
-<<<<<<< Updated upstream
         if(!item.getItemMeta().getPersistentDataContainer().has(ToasterAPI.item, PersistentDataType.STRING)) return null;
-        String id = item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.item, PersistentDataType.STRING);
-=======
         final String id = item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.item, PersistentDataType.STRING);
->>>>>>> Stashed changes
         return ToasterAPI.allItems.get(id);
     }
 
@@ -92,7 +87,7 @@ public class ItemHandler implements Listener {
 
     public static boolean consumeItem(final Player player, int count, ItemStack mat) {
         final Map<Integer, ? extends ItemStack> ammo = player.getInventory().all(mat);
-
+ 
         int found = 0;
         for (ItemStack stack : ammo.values())
             found += stack.getAmount();

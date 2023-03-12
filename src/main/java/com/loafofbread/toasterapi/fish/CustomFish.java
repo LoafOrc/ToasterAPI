@@ -33,8 +33,6 @@ public abstract class CustomFish extends CustomItem {
 
     public CustomFish(JavaPlugin plugin, String id, Material base, String name) {
         super(plugin, id, base, name);
-<<<<<<< Updated upstream
-=======
 
         HashMap<String, CustomFish> pluginFish = ToasterAPI.pluginFish.get(plugin);
         if(pluginFish == null) {
@@ -43,7 +41,6 @@ public abstract class CustomFish extends CustomItem {
         pluginFish.put(getID(), this);
         ToasterAPI.allFish.put(getID(), this);
         Fishing.Fish.add(this, getWeight());
->>>>>>> Stashed changes
     }
 
     public abstract int getXP(int size, Player player);
