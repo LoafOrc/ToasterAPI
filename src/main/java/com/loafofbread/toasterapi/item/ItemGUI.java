@@ -4,7 +4,6 @@ import com.loafofbread.toasterapi.Loottable;
 import com.loafofbread.toasterapi.ToasterAPI;
 import com.loafofbread.toasterapi.fish.CustomFish;
 import com.loafofbread.toasterapi.fish.Fishing;
-import com.sun.tools.javac.util.Names;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -107,6 +106,7 @@ public class ItemGUI implements InventoryHolder {
     private class GUIListener implements org.bukkit.event.Listener {
         @EventHandler
         public void enchantGuiClick(final InventoryClickEvent event) {
+            if(event.getInventory() == null) return;
             if (event.getInventory().getHolder() instanceof ItemGUI) {
                 event.setCancelled(true);
                 String[] args = getAction(event.getCurrentItem().getItemMeta()).split("_");

@@ -12,26 +12,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 public class CreativeCommand implements CommandExecutor {
-
-    private final String noPermission = ChatColor.RED + "" + ChatColor.BOLD + "(!)" + ChatColor.RESET + " " + ChatColor.RED + " Insufficient Permission.";
-    private final String onlyPlayersCanRunThisCommand = ChatColor.RED + "" + ChatColor.BOLD + "(!)" + ChatColor.RESET + " " + ChatColor.RED + " Only players can run this command.";
-
-    private final ToasterAPI plugin;
-    public CreativeCommand(ToasterAPI plugin) {
-        this.plugin = plugin;
+    private String createErrorMessage(String message) {
+        return ChatColor.translateAlternateColorCodes('&', "&4&l(!) &f"+message);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("creativemenu")) {
-            if(sender instanceof ConsoleCommandSender) {
-                sender.sendMessage(onlyPlayersCanRunThisCommand);
-                return true;
-            }
-            Player player = (Player) sender;
-            player.sendMessage("Opening Creative Menu");
-            ToasterAPI.itemGUI.openInv(player, 0);
+        if(!cmd.getName().equalsIgnoreCase("creativemenu")) {
+            throw new RuntimeException("how tf");
         }
+
+        if(sender instanceof ConsoleCommandSender) {
+            sender.sendMessage(createErrorMessage("Unavaliable in the console"));
+            return true;
+        }
+        Player player = (Player) sender;
+        if(!player.hasPermission("toasterapi.item.menu")) {
+            sender.sendMessage(createErrorMessage("No Permission"));
+            return true;
+        }
+
+        player.sendMessage("Opening Creative Menu");
+        ToasterAPI.itemGUI.openInv(player, 0);
+        
         return true;
     }
 }

@@ -23,6 +23,7 @@ public abstract class EnchantHandler {
             enchantsForPlugin = new HashMap<>();
         }
         enchantsForPlugin.put(enchant.getId(), enchant);
+        registerEnchantment(enchant);
     }
 
     public static int getLevel(ItemStack item, Enchantment enchant){
@@ -50,6 +51,7 @@ public abstract class EnchantHandler {
         return ench.getName() + " " + NUMERALS[enchLevel- 1];
     }
 
+    /**
     private static void unregisterEnchantment(Enchantment enchantment) {
         // Disable the Power enchantment
         Enchantment enchant = Enchantment.ARROW_DAMAGE;
@@ -74,7 +76,7 @@ public abstract class EnchantHandler {
             }
         } catch (Exception ignored) {
         }
-    }
+    } */
 
     private static void registerEnchantment(Enchantment enchantment) {
         boolean registered = true;

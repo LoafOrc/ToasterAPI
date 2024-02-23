@@ -104,6 +104,9 @@ public abstract class CustomBoss implements Listener {
     public void bossHit(EntityDamageEvent event) {}
     public void bossDeath(EntityDeathEvent event) {}
 
+
+    protected void attack() {}
+
     @EventHandler
     public void playerDeath(PlayerDeathEvent event) {
         if(getInvolved().size() == 0) remove();

@@ -8,7 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -16,35 +18,46 @@ import java.util.Map;
 
 public class ItemHandler implements Listener {
     @EventHandler
-    public void rightClick(PlayerInteractEvent event) {
+    public void rightClick(final PlayerInteractEvent event) {
         if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            CustomItem item = getItem(event.getItem());
+            final CustomItem item = getItem(event.getItem());
             if(item != null) item.rightClick(event);
         }
     }
     @EventHandler
-    public void leftClick(PlayerInteractEvent event) {
+    public void leftClick(final PlayerInteractEvent event) {
         if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
-            CustomItem item = getItem(event.getItem());
+            final CustomItem item = getItem(event.getItem());
             if(item != null) item.leftClick(event);
         }
     }
     @EventHandler
-    public void entityHit(EntityDamageByEntityEvent event) {
+    public void entityHit(final EntityDamageByEntityEvent event) {
         if(event.getDamager().getType() != EntityType.PLAYER) return;
-        Player player = (Player) event.getDamager();
-        CustomItem item = getItem(player.getItemInUse());
+        final Player player = (Player) event.getDamager();
+        final CustomItem item = getItem(player.getItemInUse());
         if(item != null) item.entityHit(event);
     }
+    @EventHandler
+    public void consumed(final PlayerItemConsumeEvent event) {
+        CustomItem item = getItem(event.getItem());
+        if(item != null) item.consumed(event);
+    }
+    @EventHandler
+    public void dropped(final PlayerDropItemEvent event) {
+        CustomItem item = getItem(event.getItemDrop().getItemStack());
+        if(item != null) item.dropped(event);
+    }
 
-    private CustomItem getItem(ItemStack item) {
+    private CustomItem getItem(final ItemStack item) {
         if(item == null) return null;
-        String id = item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.item, PersistentDataType.STRING);
+        if(!item.getItemMeta().getPersistentDataContainer().has(ToasterAPI.item, PersistentDataType.STRING)) return null;
+        final String id = item.getItemMeta().getPersistentDataContainer().get(ToasterAPI.item, PersistentDataType.STRING);
         return ToasterAPI.allItems.get(id);
     }
 
-    public static boolean consumeItem(Player player, int count, Material mat) {
-        Map<Integer, ? extends ItemStack> ammo = player.getInventory().all(mat);
+    public static boolean consumeItem(final Player player, int count, final Material mat) {
+        final Map<Integer, ? extends ItemStack> ammo = player.getInventory().all(mat);
 
         int found = 0;
         for (ItemStack stack : ammo.values())
@@ -72,9 +85,9 @@ public class ItemHandler implements Listener {
     }
 
 
-    public static boolean consumeItem(Player player, int count, ItemStack mat) {
-        Map<Integer, ? extends ItemStack> ammo = player.getInventory().all(mat);
-
+    public static boolean consumeItem(final Player player, int count, ItemStack mat) {
+        final Map<Integer, ? extends ItemStack> ammo = player.getInventory().all(mat);
+ 
         int found = 0;
         for (ItemStack stack : ammo.values())
             found += stack.getAmount();
